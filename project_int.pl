@@ -90,8 +90,8 @@ foreach my $record ( @data ) {
 
 close $data_fh;
 
-# store geo code of all provinces (from crime_data) in provinces hash
-my %provinces = (
+# store geo code of all Provinces (from crime_data) in Provinces hash
+my %Provinces = (
     newfoundland => 2,
     pei => 4,
     nova_scotia => 5,
@@ -106,8 +106,8 @@ my %provinces = (
     northwest_territories => 41,
     nunavut => 42
 );
-# store geo code of all cities (from crime_data) in cities hash
-my %cities = (
+# store geo code of all Cities (from crime_data) in Cities hash
+my %Cities = (
     st_johns => 3,
     halifax => 6,
     moncton => 43,
@@ -177,7 +177,7 @@ sub print_violations {
 }
 #   find violation string
 sub violation_names {
-    # From user input: year, violation #, 0 (city) or 1 (province), 0 (low) or 1 (high)
+    # From user input: year, violation #, 0 (city) or 1 (Province), 0 (low) or 1 (high)
     my ($violation) = @_;
     my $violation_name;
     #violation names
@@ -208,9 +208,9 @@ sub violation_names {
     }
     return $violation_name;
 }
-#   user choice provinces
-sub print_provinces {
-    print "\n\n    ~~ LOCATION NUMBERS: PROVINCES ~~\n\n";
+#   user choice Provinces
+sub print_Provinces {
+    print "\n\n    ~~ LOCATION NUMBERS: ProvinceS ~~\n\n";
     print "     Alberta                         33\n";
     print "     British Columbia                36\n";
     print "     Manitoba                        28\n";
@@ -225,9 +225,9 @@ sub print_provinces {
     print "     Saskatchewan                    30\n";
     print "     Yukon                           40\n";
 }
-#   user choice cities
-sub print_cities {
-    print "\n\n     ~~~~~~ LOCATION NUMBERS: MAJOR CITIES ~~~~~~\n\n";
+#   user choice Cities
+sub print_Cities {
+    print "\n\n     ~~~~~~ LOCATION NUMBERS: MAJOR Cities ~~~~~~\n\n";
     print "     St. John's, Newfoundland and Labrador       3\n";
     print "     Halifax, Nova Scotia                        6\n";
     print "     Moncton, New Brunswick                     43\n";
@@ -359,11 +359,11 @@ sub question_one_three {
     my $not_complete = 0;
 
     if ($geo == 1) {
-        for my $key (values %provinces) {
+        for my $key (values %Provinces) {
             push @coordinate_keys, "$key.$violation.2";
         }
     } else {
-        for my $key (values %cities) {
+        for my $key (values %Cities) {
             push @coordinate_keys, "$key.$violation.2";
         }
     }
@@ -420,11 +420,11 @@ sub question_two_four {
     my @end_coords;
 
     if ($geo == 1) {
-        for my $key (values %provinces) {
+        for my $key (values %Provinces) {
             push @coordinate_keys, "$key.$violation.2";
         }
     } else {
-        for my $key (values %cities) {
+        for my $key (values %Cities) {
             push @coordinate_keys, "$key.$violation.2";
         }
     }
@@ -583,9 +583,9 @@ while ($programFlag == 0) {
 
         # FIRST QUESTION
         if ($setQ == 1) {
-            print "\nFILL IN THE BLANKS: What (province/city) had the (highest/lowest) rate of (violation) in (year)?\n";
+            print "\nFILL IN THE BLANKS: What (Province/city) had the (highest/lowest) rate of (violation) in (year)?\n";
             while ($flag == 0) {
-                print "\nProvince or city? (1 for province, 2 for city): ";
+                print "\nProvince or city? (1 for Province, 2 for city): ";
                 $geo = <STDIN>;
                 chomp $geo;
                 if ( ($geo == 1 || $geo == 2) && $geo != '') {
@@ -633,7 +633,7 @@ while ($programFlag == 0) {
                 @split_it = split (/\./, @$coords[0]);
                 $location = location_name($split_it[0]);
                 if($geo == 1) {
-                   print("\nThe province with the highest rate of $violation_name in $year was $location. The rate was @$values[0] per 100,000 population.\n");                   
+                   print("\nThe Province with the highest rate of $violation_name in $year was $location. The rate was @$values[0] per 100,000 population.\n");                   
                 } elsif ($geo == 2) {
                    print("\nThe city with the highest rate of $violation_name in $year was $location. The rate was @$values[0] per 100,000 population.\n");                   
                 }
@@ -642,7 +642,7 @@ while ($programFlag == 0) {
                 @split_it = split (/\./, @$coords[$size]);
                 $location = location_name($split_it[0]);
                 if ($geo == 1) {
-                   print("\nThe province with the lowest rate of $violation_name in $year was $location. The rate was @$values[$size] per 100,000 population.\n");                   
+                   print("\nThe Province with the lowest rate of $violation_name in $year was $location. The rate was @$values[$size] per 100,000 population.\n");                   
                 } elsif ($geo == 2) {
                    print("\nThe city with the lowest rate of $violation_name in $year was $location. The rate was @$values[$size] per 100,000 population.\n");                   
                 }
@@ -650,10 +650,10 @@ while ($programFlag == 0) {
            print "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NEXT QUESTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"; 
          #   SECOND QUESTION
         } elsif ($setQ == 2) {
-               print "\nFILL IN THE BLANKS: What (province/city) had the (highest/lowest) percent change in (violation) from (year) to (year)?\n";
+               print "\nFILL IN THE BLANKS: What (Province/city) had the (highest/lowest) percent change in (violation) from (year) to (year)?\n";
                
                while ($flag == 0) {
-                   print "\nProvince or city? (1 for province, 2 for city): ";
+                   print "\nProvince or city? (1 for Province, 2 for city): ";
                    $geo = <STDIN>;
                    chomp $geo ;
                    if (($geo  == 1 || $geo  == 2) && $geo  != '') {
@@ -711,7 +711,7 @@ while ($programFlag == 0) {
                     @split_it = split (/\./, @$coords[0]);
                     $location = location_name($split_it[0]);
                     if($geo == 1) {
-                       print("\nThe province with the highest percent change of $violation_name between $start_year and $end_year was $location. The percent change was @$percents[0]%.\n");                   
+                       print("\nThe Province with the highest percent change of $violation_name between $start_year and $end_year was $location. The percent change was @$percents[0]%.\n");                   
                     } elsif ($geo == 2) {
                        print("\nThe city with the highest percent change of $violation_name between $start_year and $end_year was $location. The percent change was @$percents[0]%.\n");                   
                     }
@@ -720,7 +720,7 @@ while ($programFlag == 0) {
                     @split_it = split (/\./, @$coords[$size]);
                     $location = location_name($split_it[0]);
                     if ($geo == 1) {
-                       print("\nThe province with the lowest percent change of $violation_name between $start_year and $end_year was $location. The percent change was @$percents[$size]%.\n");                   
+                       print("\nThe Province with the lowest percent change of $violation_name between $start_year and $end_year was $location. The percent change was @$percents[$size]%.\n");                   
                     } elsif ($geo == 2) {
                        print("\nThe city with the lowest percent change of $violation_name between $start_year and $end_year was $location. The percent change was @$percents[$size]%.\n");                   
                     }
@@ -728,9 +728,9 @@ while ($programFlag == 0) {
                print "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NEXT QUESTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"; 
         #  THIRD QUESTION
        } elsif ($setQ == 3) {
-           print "\nFILL IN THE BLANKS: What (provinces/cities) had the (top/bottom) (n) rate of (violation) in (year)?\n";
+           print "\nFILL IN THE BLANKS: What (Provinces/Cities) had the (top/bottom) (n) rate of (violation) in (year)?\n";
            while ($flag == 0) {
-               print "\nProvince or city? (1 for province, 2 for city): ";
+               print "\nProvince or city? (1 for Province, 2 for city): ";
                $geo = <STDIN>;
                chomp $geo;
                if ( ($geo == 1 || $geo == 2) && $geo != '') {
@@ -791,14 +791,14 @@ while ($programFlag == 0) {
            print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RESULT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
            if($high_low == 1) {
                 if($geo == 1) {
-                   print("\nThe top $n provinces with the highest rates of $violation_name in $year are:\n");
+                   print("\nThe top $n Provinces with the highest rates of $violation_name in $year are:\n");
                    for($i = 0; $i < $n; $i++) {
                        @split_it = split (/\./, @$coords[$i]);
                        my $location = location_name($split_it[0]);
                        print("\n",$i+1,".   $location: @$values[$i] per 100,000 population.");
                    } 
                 } elsif ($geo == 2) {
-                    print("\nThe top $n cities with the highest rates of $violation_name in $year are:\n");
+                    print("\nThe top $n Cities with the highest rates of $violation_name in $year are:\n");
                    for($i = 1; $i <= $n; $i++) {
                        @split_it = split (/\./, @$coords[$i]);
                        my $location = location_name($split_it[0]);
@@ -808,14 +808,14 @@ while ($programFlag == 0) {
            } else {
                 my $size = scalar(@$values) - 2;
                 if($geo == 1) {
-                   print("\nThe bottom $n provinces with the lowest rates of $violation_name in $year are:\n");
+                   print("\nThe bottom $n Provinces with the lowest rates of $violation_name in $year are:\n");
                    for($i = ($size - $n + 1); $i <= $size; $i++) {
                        @split_it = split (/\./, @$coords[$i]);
                        my $location = location_name($split_it[0]);
                        print("\n",$i+1,".   $location: @$values[$i] per 100,000 population.");
                    }
                 } elsif ($geo == 2) {
-                   print("\nThe bottom $n cities with the lowest rates of $violation_name in $year are:\n");
+                   print("\nThe bottom $n Cities with the lowest rates of $violation_name in $year are:\n");
                    for($i = ($size - $n + 1); $i <= $size; $i++) {
                        @split_it = split (/\./, @$coords[$i]);
                        my $location = location_name($split_it[0]);
@@ -825,9 +825,9 @@ while ($programFlag == 0) {
            }
            print "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ NEXT QUESTION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
        } elsif ($setQ == 4) {
-           print "\nFILL IN THE BLANKS: What (provinces/cities) had the (top/bottom) (n) percent change of (violation) from (start year) to (end year)?\n";
+           print "\nFILL IN THE BLANKS: What (Provinces/Cities) had the (top/bottom) (n) percent change of (violation) from (start year) to (end year)?\n";
            while ($flag == 0) {
-               print "\nProvince or city? (1 for province, 2 for city): ";
+               print "\nProvince or city? (1 for Province, 2 for City): ";
                $geo = <STDIN>;
                chomp $geo;
                if ( ($geo == 1 || $geo == 2) && $geo != '') {
@@ -896,12 +896,12 @@ while ($programFlag == 0) {
            
            print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RESULT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
            if($high_low == 1) {
-               print("\nThe top $n (provinces/cities) with the highest percent change of $violation_name from $start_year to $end_year are:\n");
+               print("\nThe top $n (Provinces/Cities) with the highest percent change of $violation_name from $start_year to $end_year are:\n");
                for($i = 1; $i <= $n; $i++) {
                    print("\n$i. (location i): (value i) per 100,000 population.");
                }
            } else {
-               print("\nThe bottom $n (provinces/cities) with the lowest percent change of $violation_name from $start_year to $end_year are:\n");
+               print("\nThe bottom $n (Provinces/Cities) with the lowest percent change of $violation_name from $start_year to $end_year are:\n");
                for($i = 1; $i <= $n; $i++) {
                    print("\n$i. (location i): (value i) per 100,000 population.");
                }
@@ -910,16 +910,16 @@ while ($programFlag == 0) {
        } elsif ($setQ == 5) {
            print "\nFILL IN THE BLANKS: Give me the line graph showing the trend of our 12 violations in (location) between (start year) and (end year).\n";
            while ($flag == 0) {
-               print "\nProvince or city? (1 for province, 2 for city): ";
+               print "\nProvince or city? (1 for Province, 2 for City): ";
                $general_geo = <STDIN>;
                chomp $general_geo;
                if (($general_geo  == 1 || $general_geo == 2) && $general_geo != '') {
                    $flag = 1;
                }
                if($general_geo == 1) {
-                    print_provinces();
+                    print_Provinces();
                } elsif($general_geo = 2) {
-                    print_cities();
+                    print_Cities();
                }
            }
            $flag = 0;
